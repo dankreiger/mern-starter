@@ -1,10 +1,11 @@
-const express = require('express');
+import express from 'express';
+import gravatar from 'gravatar';
+import bcrypt from 'bcryptjs';
+
 const router = express.Router();
-const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
 
 // Load User model
-const User = require('../../models/User');
+import * as User from '../../models/User';
 
 // @route  GET api/users/test
 // @desc   Tests users route
