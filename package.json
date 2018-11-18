@@ -9,7 +9,8 @@
     "server": "nodemon --exec babel-node --presets env,stage-2 server.js",
     "sort": "sort-package-json",
     "start": "nodemon --exec babel-node --presets env,stage-2 server.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test-ci": "jest"
   },
   "husky": {
     "hooks": {
