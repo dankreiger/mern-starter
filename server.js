@@ -3,6 +3,8 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import passport from 'passport'
+
 
 import users from './routes/api/users';
 import profile from './routes/api/profile';
@@ -23,10 +25,14 @@ mongoose
     db,
     { useNewUrlParser: true }
   )
-  .then(() => console.log('MongoDB Connected'))
+  .then(() => console.log('MongoDB Connected 🐶'))
   .catch(err => console.log(err));
 
-app.get('/', (req, res) => res.send('Hello'));
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport);
 
 // Use routes
 app.use('/api/users', users);

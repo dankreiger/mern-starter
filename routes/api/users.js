@@ -1,24 +1,46 @@
 import express from 'express';
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
+import keys from '../../config/keys';
+import jwt from 'jsonwebtoken';
+import passport from 'passport';
 
 const router = express.Router();
 
+
+// Load Input Validation
+import validateRegisterInput from '../../validation/register';
+import validateLoginInput from '../../validation/login';
+
 // Load User model
-import * as User from '../../models/User';
+import User from '../../models/User';
 
 // @route  GET api/users/test
 // @desc   Tests users route
 // @access Public
-router.get('/test', (req, res) => res.json({ msg: 'Users Works' }));
+router.get('/test', (req, res) => res.json({
+  msg: 'Users Works'
+}));
 
 // @route  POST api/users/register
 // @desc   Register user
 // @access Public
 router.post('/register', (req, res) => {
-  User.findOne({ email: req.body.email }).then(user => {
+  const {
+    errors,
+    isValid
+  } = validateRegisterInput(req.body);
+
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  User.findOne({
+    email: req.body.email
+  }).then(user => {
     if (user) {
-      return res.status(400).json({ email: 'Email already exists' });
+      errors.email = 'Email already exists';
+      return res.status(400).json(errors);
     } else {
       const avatar = gravatar.url(req.body.email, {
         s: '200', // Size
@@ -46,5 +68,88 @@ router.post('/register', (req, res) => {
     }
   });
 });
+
+// @route   POST api/users/login
+// @desc    Login User / Returning JWT Token
+// @access Public
+router.post('/login', (req, res) => {
+  const {
+    errors,
+    isValid
+  } = validateLoginInput(req.body);
+
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const {
+    email,
+    password
+  } = req.body;
+
+  // Find user by email
+  User.findOne({
+    email
+  }).then(user => {
+    // Check for user
+    if (!user) {
+      errors.email = 'User not found';
+      return res.status(404).json(errors);
+    }
+
+    // Check Password
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        // User Matched
+
+        const payload = {
+          id: user.id,
+          name: user.name,
+          avatar: user.avatar
+        }; // Create JWT Payload
+
+        // Sign Token
+        jwt.sign(
+          payload,
+          keys.secretOrKey, {
+            expiresIn: 3600
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: 'Bearer ' + token
+            });
+          }
+        );
+      } else {
+        errors.password = 'Password incorrect';
+        return res.status(400).json(errors);
+      }
+    });
+  });
+});
+
+// @route  GET api/users/current
+// @desc   Return current user
+// @access Private
+router.get(
+  '/current',
+  passport.authenticate('jwt', {
+    session: false
+  }),
+  (req, res) => {
+    const {
+      id,
+      name,
+      email
+    } = req.user;
+    res.json({
+      id,
+      name,
+      email
+    });
+  }
+);
 
 module.exports = router;
