@@ -6,9 +6,9 @@
   "author": "Dan Kreiger <dan@dankreiger.com> (http://www.dankreiger.com/)",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
+    "why-would-i-do-this": "node server.js",
     "sort": "sort-package-json",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "husky": {
     "hooks": {
