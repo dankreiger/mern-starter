@@ -6,6 +6,7 @@ const passport = require('passport');
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
+const validateEducationInput = require('../../validation/education');
 
 // Load Profile Model
 const Profile = require('../../models/Profile');
@@ -191,17 +192,8 @@ router.post(
     }
 
     Profile.findOne({ user: req.user.id }).then(profile => {
-      const {
-        company,
-        current,
-        description,
-        from,
-        location,
-        title,
-        to
-      } = req.body;
+      const { company, current, description, from, location, to } = req.body;
       const newExp = {
-        title,
         company,
         location,
         from,
@@ -212,6 +204,51 @@ router.post(
 
       // Add to experience array
       profile.experience.unshift(newExp);
+
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
+// @route  POST api/profile/education
+// @desc   Add education to profile
+// @access Private
+router.post(
+  '/education',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateEducationInput(req.body);
+
+    // Check validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const {
+        school,
+        current,
+        description,
+        from,
+        fieldofstudy,
+        degree,
+        title,
+        to
+      } = req.body;
+      const newEdu = {
+        title,
+        school,
+        fieldofstudy,
+        degree,
+        from,
+        to,
+        current,
+        description
+      };
+
+      // Add to experience array
+      profile.education.unshift(newEdu);
 
       profile.save().then(profile => res.json(profile));
     });
