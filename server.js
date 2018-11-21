@@ -1,13 +1,14 @@
-require('dotenv').load();
+import 'dotenv/config';
 
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const passport = require('passport');
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import passport from 'passport'
 
-const users = require('./routes/api/users');
-const profile = require('./routes/api/profile');
-const posts = require('./routes/api/posts');
+
+import users from './routes/api/users';
+import profile from './routes/api/profile';
+import posts from './routes/api/posts';
 
 const app = express();
 
