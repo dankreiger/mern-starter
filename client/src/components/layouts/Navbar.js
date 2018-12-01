@@ -5,7 +5,7 @@ export default () => {
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
       <div className="container">
         <a className="navbar-brand" href="landing.html">
-          DevConnector
+          Puppy Connector
         </a>
         <button
           className="navbar-toggler"
