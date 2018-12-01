@@ -61,7 +61,6 @@ export default class Register extends Component {
                 <div className="form-group">
                   <input
                     type="email"
-                    className="form-control form-control-lg"
                     className={classNames('form-control form-control-lg', {
                       'is-invalid': errors.email
                     })}
