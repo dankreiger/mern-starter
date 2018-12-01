@@ -2,4 +2,4 @@
 
 prerequisites:
 
-- Enter MongoDB user and password in `config/keys.js` (visit mLab)
+- Enter MongoDB user and password in `config/keys.js` (visit [mLab](https://mlab.com/))
