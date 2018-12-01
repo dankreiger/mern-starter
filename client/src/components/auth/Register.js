@@ -44,7 +44,7 @@ export default class Register extends Component {
               <p className="lead text-center">
                 Create your Puppy Connector account
               </p>
-              <form onSubmit={this.onSubmit}>
+              <form noValidate onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -87,7 +87,7 @@ export default class Register extends Component {
                     onChange={this.onChange}
                     value={password}
                   />
-                  <div class="invalid-feedback">{errors.password}</div>
+                  <div className="invalid-feedback">{errors.password}</div>
                 </div>
                 <div className="form-group">
                   <input
@@ -100,7 +100,7 @@ export default class Register extends Component {
                     onChange={this.onChange}
                     value={password2}
                   />
-                  <div class="invalid-feedback">{errors.password2}</div>
+                  <div className="invalid-feedback">{errors.password2}</div>
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>

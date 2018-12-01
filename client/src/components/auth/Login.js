@@ -20,7 +20,7 @@ export default class Login extends Component {
       password
     };
     axios
-      .post('/api/users/register', user)
+      .post('/api/users/login', user)
       .then(res => console.log(res.data))
       .catch(err => this.setState({ errors: err.response.data }));
   };
@@ -38,7 +38,7 @@ export default class Login extends Component {
               <p className="lead text-center">
                 Sign in to your Puppy Connector account
               </p>
-              <form onSubmit={this.onSubmit}>
+              <form noValidate onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="email"
