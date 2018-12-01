@@ -6,9 +6,12 @@
   "author": "Dan Kreiger <dan@dankreiger.com> (http://www.dankreiger.com/)",
   "main": "server.js",
   "scripts": {
-    "why-would-i-do-this": "node server.js",
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "sort": "sort-package-json",
-    "start": "nodemon server.js"
+    "server": "nodemon server.js",
+    "start": "node server.js"
   },
   "husky": {
     "hooks": {
@@ -17,8 +20,10 @@
     }
   },
   "dependencies": {
+    "axios": "0.18.0",
     "bcryptjs": "2.4.3",
     "body-parser": "1.18.3",
+    "concurrently": "4.1.0",
     "dotenv": "6.1.0",
     "express": "4.16.4",
     "gravatar": "1.6.0",
