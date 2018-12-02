@@ -5,7 +5,7 @@ import classNames from 'classnames';
 const FormInput = ({
   errorMessage,
   onChange,
-  gravatarMessage,
+  info,
   name,
   placeholder,
   type,
@@ -21,20 +21,16 @@ const FormInput = ({
       name={name}
       value={value}
       onChange={onChange}
+      autoComplete={type === 'password' ? 'current-password' : ''}
     />
     <div className="invalid-feedback">{errorMessage}</div>
-    {gravatarMessage && (
-      <small className="form-text text-muted">
-        This site uses Gravatar so if you want a profile image, use a Gravatar
-        email
-      </small>
-    )}
+    {info && <small className="form-text text-muted">{info}</small>}
   </div>
 );
 
 FormInput.propTypes = {
-  errorMessage: PropTypes.object,
-  gravatarMessage: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  info: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,

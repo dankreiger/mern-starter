@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { registerUser } from './../../actions/authActions';
-import FormInput from './FormInput';
+import FormInput from './../common/FormInput';
 
 class Register extends Component {
   constructor() {
@@ -71,7 +71,7 @@ class Register extends Component {
                   placeholder="Email Address"
                   type="email"
                   value={email}
-                  gravatarMessage={true}
+                  info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                 />
                 <FormInput
                   errorMessage={errors.password}

@@ -1,21 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from './../../actions/authActions';
 
-const Navbar = ({ auth, logoutUser }) => {
+const Navbar = ({ auth, history, logoutUser }) => {
   const onLogoutClick = e => {
     e.preventDefault();
-    logoutUser();
+    logoutUser(history);
   };
   const { isAuthenticated, user } = auth;
   const authLinks = (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
-        <span onClick={onLogoutClick} className="nav-link">
-          <img className="rounded-circle" src={user.avatar} alt={user.name} style={{width: '25px', marginRight: '5px'}} title="You must have a Gravatar connected to your email to display an image" />
-          {' '}Logout
+        <span
+          onClick={onLogoutClick}
+          className="nav-link"
+          style={{ cursor: 'pointer' }}
+        >
+          <img
+            className="rounded-circle"
+            src={user.avatar}
+            alt={user.name}
+            style={{ width: '25px', marginRight: '5px' }}
+            title="You must have a Gravatar connected to your email to display an image"
+          />{' '}
+          Logout
         </span>
       </li>
     </ul>
@@ -78,4 +88,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logoutUser }
-)(Navbar);
+)(withRouter(Navbar));
