@@ -1,17 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import isEmpty from '../../validation/is-empty';
-
-// class ProfileItem extends Component {
-//   static propTypes = {
-//     prop: PropTypes
-//   };
-
-//   render() {
-//     return <div />;
-//   }
-// }
 
 const ProfileItem = ({ profile }) => {
   console.log(profile);
