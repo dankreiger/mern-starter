@@ -61,7 +61,6 @@ class Register extends Component {
                   onChange={this.onChange}
                   name="name"
                   placeholder="Name"
-                  type="text"
                   value={name}
                 />
                 <FormInput

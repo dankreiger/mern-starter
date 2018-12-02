@@ -23,8 +23,8 @@ const FormInput = ({
       onChange={onChange}
       autoComplete={type === 'password' ? 'current-password' : ''}
     />
-    <div className="invalid-feedback">{errorMessage}</div>
     {info && <small className="form-text text-muted">{info}</small>}
+    {errorMessage && <div className="invalid-feedback">{errorMessage}</div>}
   </div>
 );
 
@@ -34,8 +34,13 @@ FormInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.string
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  disabled: PropTypes.string
+};
+
+FormInput.defaultProps = {
+  type: 'text'
 };
 
 export default FormInput;
