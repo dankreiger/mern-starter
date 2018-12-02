@@ -2,18 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const FormInput = ({
+const InputGroup = ({
   errorMessage,
   onChange,
-  info,
+  icon,
   name,
-  placeholder,
   type,
+  placeholder,
   value
 }) => (
-  <div className="form-group">
+  <div className="input-group mb-3">
+    <div className="input-group-prepend">
+      <span className="input-group-text">
+        <i className={icon} />
+      </span>
+    </div>
     <input
-      type={type}
       className={classNames('form-control form-control-lg', {
         'is-invalid': errorMessage
       })}
@@ -21,26 +25,23 @@ const FormInput = ({
       name={name}
       value={value}
       onChange={onChange}
-      autoComplete={type === 'password' ? 'current-password' : ''}
     />
-    {info && <small className="form-text text-muted">{info}</small>}
     {errorMessage && <div className="invalid-feedback">{errorMessage}</div>}
   </div>
 );
 
-FormInput.propTypes = {
+InputGroup.propTypes = {
   errorMessage: PropTypes.string,
-  info: PropTypes.string,
+  icon: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  disabled: PropTypes.string
+  value: PropTypes.string.isRequired
 };
 
-FormInput.defaultProps = {
+InputGroup.defaultProps = {
   type: 'text'
 };
 
-export default FormInput;
+export default InputGroup;

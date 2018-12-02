@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from './../../actions/authActions';
-import FormInput from './../common/FormInput';
+import TextFieldGroup from '../common/TextFieldGroup';
 class Login extends Component {
   constructor() {
     super();
@@ -52,7 +52,7 @@ class Login extends Component {
                 Sign in to your Puppy Connector account
               </p>
               <form noValidate onSubmit={this.onSubmit}>
-                <FormInput
+                <TextFieldGroup
                   errorMessage={errors.email}
                   onChange={this.onChange}
                   name="email"
@@ -60,7 +60,7 @@ class Login extends Component {
                   type="email"
                   value={email}
                 />
-                <FormInput
+                <TextFieldGroup
                   errorMessage={errors.password}
                   onChange={this.onChange}
                   name="password"

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { registerUser } from './../../actions/authActions';
-import FormInput from './../common/FormInput';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 class Register extends Component {
   constructor() {
@@ -56,14 +56,14 @@ class Register extends Component {
                 Create your Puppy Connector account
               </p>
               <form noValidate onSubmit={this.onSubmit}>
-                <FormInput
+                <TextFieldGroup
                   errorMessage={errors.name}
                   onChange={this.onChange}
                   name="name"
                   placeholder="Name"
                   value={name}
                 />
-                <FormInput
+                <TextFieldGroup
                   errorMessage={errors.email}
                   onChange={this.onChange}
                   name="email"
@@ -72,7 +72,7 @@ class Register extends Component {
                   value={email}
                   info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                 />
-                <FormInput
+                <TextFieldGroup
                   errorMessage={errors.password}
                   onChange={this.onChange}
                   name="password"
@@ -80,7 +80,7 @@ class Register extends Component {
                   type="password"
                   value={password}
                 />
-                <FormInput
+                <TextFieldGroup
                   errorMessage={errors.password2}
                   onChange={this.onChange}
                   name="password2"
