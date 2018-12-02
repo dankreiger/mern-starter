@@ -1,5 +1,12 @@
 .App {
   position: relative;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
 }
 
 img {
@@ -40,13 +47,4 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
-}
-
-.footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  right: 0;
-  bottom: -100px;
 }
