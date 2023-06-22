@@ -25,7 +25,7 @@
     "concurrently": "4.1.0",
     "dotenv": "6.1.0",
     "express": "4.16.4",
-    "gravatar": "1.6.0",
+    "gravatar": "1.8.2",
     "jsonwebtoken": "8.4.0",
     "mongoose": "5.3.12",
     "passport": "0.4.0",
